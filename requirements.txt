@@ -1,1 +1,1 @@
-gender-guesser==0.4.0
+gender_guesser
