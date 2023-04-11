@@ -1,5 +1,5 @@
 import pandas as pd
-pip install gender_guesser
+import gender_guesser
 import gender_guesser.detector as gender
 import streamlit as st
 import base64
