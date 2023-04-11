@@ -1,12 +1,4 @@
 import streamlit as st
-# Install required libraries
-def install_packages():
-    !pip install -r requirements.txt
-
-# Call the function to install the required packages
-install_packages()
-
-
 import pandas as pd
 import gender_guesser.detector as gender
 import streamlit as st
