@@ -6,9 +6,13 @@ import base64
 
 def app():
 
-    # Set title and subtitle
-    st.title("Gender Filter V2")
+    # Set title and subtitle, additional text
+    st.title("Gender Profile Filter V2")
     st.subheader("Property of Connected Circles")
+    st.write("""This app allows you to filter lists of profiles by gender. It does so by isolating the fist name from the surname, prefixes and suffixes
+    and subsequently analyzing the fisrt name using the Python library "gender_guesser". Results, which are not certain are labeled as "unknown" are 
+    excluded from the filtered results (This may happen for ususual/non-european language first names). You can preview the both the labeled and 
+    filtered data in the two preview windows below. You can download the data either labeled, filtered or filtered profile URLs only, all as a .csv""")
 
     # File uploader
     uploaded_file = st.file_uploader("Choose a CSV file to filter", type="csv")
