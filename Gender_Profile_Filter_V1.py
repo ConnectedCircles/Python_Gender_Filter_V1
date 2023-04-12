@@ -18,7 +18,7 @@ def app():
     uploaded_file = st.file_uploader("Choose a CSV file to filter", type="csv")
 
     # Define radio button options
-    gender_options = ['All', 'Male', 'Female']
+    gender_options = ['Male', 'Female']
 
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
