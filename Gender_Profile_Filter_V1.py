@@ -33,8 +33,10 @@ def app():
                 return 'unknown'
 
         # Clean name data
-        # remove "Dr."
-        df['FirstName'] = df['Full name'].str.lower().str.replace('dr.', '').str.strip()
+        #remove "Dr.", "Prof." etc.
+        df['FirstName'] = df['Full name'].str.replace('Dr.', '').str.strip()
+        df['FirstName'] = df['FirstName'].str.lower().str.replace('prof.', '').str.strip()
+        df['FirstName'] = df['FirstName'].str.lower().str.replace('professor', '').str.strip()
         # change "-" to " "
         df['FirstName'] = df['FirstName'].str.lower().str.replace('-', ' ').str.strip()
         # remove surnames
