@@ -7,11 +7,14 @@ import base64
 def app():
 
     # Set title and subtitle
-    st.title("Gender Filter V1")
+    st.title("Gender Filter V2")
     st.subheader("Property of Connected Circles")
 
     # File uploader
     uploaded_file = st.file_uploader("Choose a CSV file to filter", type="csv")
+
+    # Define radio button options
+    gender_options = ['All', 'Male', 'Female']
 
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
@@ -49,9 +52,20 @@ def app():
         # Apply the get_gender function to create a new "gender" column in the DataFrame
         df['gender'] = df['FirstName'].apply(get_gender)
 
-        # Filter to only include certain gender, delete gender column
-        dffiltered = df[df["gender"]=="F"]
-        dffiltered = dffiltered.drop(["FirstName", "gender"], axis=1)
+        # Get selected gender option from radio button
+        selected_gender = st.radio('Select a gender to filter by:', gender_options)
+
+        if selected_gender == 'Male':
+            # Filter to only include male gender, delete gender column
+            dffiltered = df[df["gender"]=="M"]
+            dffiltered = dffiltered.drop(["FirstName", "gender"], axis=1)
+        elif selected_gender == 'Female':
+            # Filter to only include female gender, delete gender column
+            dffiltered = df[df["gender"]=="F"]
+            dffiltered = dffiltered.drop(["FirstName", "gender"], axis=1)
+        else:
+            # Keep all observations, delete gender column
+            dffiltered = df.drop(["FirstName", "gender"], axis=1)
 
         # Download link for filtered data
         csv_filtered = dffiltered.to_csv(index=False)
