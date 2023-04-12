@@ -50,13 +50,7 @@ def app():
         df['gender'] = df['FirstName'].apply(get_gender)
 
         # Filter to only include certain gender, delete gender column
-        gender_filter = st.selectbox("Filter to only include:", ["All", "Male", "Female"])
-        if gender_filter == "Male":
-            dffiltered = df[df["gender"]=="M"]
-        elif gender_filter == "Female":
-            dffiltered = df[df["gender"]=="F"]
-        else:
-            dffiltered = df
+        dffiltered = df[df["gender"]=="F"]
         dffiltered = dffiltered.drop(["FirstName", "gender"], axis=1)
 
         # Download link for filtered data
@@ -67,7 +61,7 @@ def app():
         # Download link for unfiltered data
         csv_unfiltered = df.to_csv(index=False)
         b64_unfiltered = base64.b64encode(csv_unfiltered.encode('utf-8')).decode()
-        href_unfiltered = f'<a href="data:file/csv;base64,{b64_unfiltered}"
+        href_unfiltered = f'<a href="data:file/csv;base64,{b64_unfiltered}" download="unfiltered_data.csv">Download Unfiltered CSV File</a>'
 
         # Download link for filtered data URLs only, no header
         url_col = dffiltered["Profile url"].dropna().astype(str)
